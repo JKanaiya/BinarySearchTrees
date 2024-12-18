@@ -10,14 +10,14 @@ const BinarySearchFactory = function () {
   };
 
   const Tree = function (temp) {
-    let head = null;
+    let root = null;
     function buildTree(arr) {
       if (arr.length <= 1) {
         return nodeConstruct(arr[0]);
       }
       let mid = Math.round((arr.length - 1) / 2);
-      if (head == null) {
-        head = nodeConstruct(
+      if (root == null) {
+        root = nodeConstruct(
           arr[mid],
           buildTree(arr.slice(0, mid)),
           buildTree(arr.slice(mid + 1))
@@ -31,7 +31,7 @@ const BinarySearchFactory = function () {
     }
     temp = prepareArray(temp);
     buildTree(temp);
-    return head;
+    return root;
   };
 
   const prepareArray = function (arr) {
