@@ -23,11 +23,22 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 
 prettyPrint(test.Tree(testArr));
 
-console.log("Level-Order");
-console.log(levelOrder(test.Tree(testArr)));
-console.log("Pre-Order");
-console.log(preOrder(test.Tree(testArr)));
-console.log("In-Order");
-console.log(inOrder(test.Tree(testArr)));
-console.log("Post-Order");
-console.log(postOrder(test.Tree(testArr)));
+// console.log("Level-Order");
+// console.log(levelOrder(test.Tree(testArr)));
+// console.log("Pre-Order");
+// console.log(preOrder(test.Tree(testArr)));
+// console.log("In-Order");
+// console.log(inOrder(test.Tree(testArr)));
+// console.log("Post-Order");
+// console.log(postOrder(test.Tree(testArr)));
+let value = 8;
+// console.log("Find Value " + value);
+// console.log(test.find(value));
+// console.log(test.insertNode(42));
+console.log(test.insertNode(9));
+// console.log(test.insertNode(10));
+// console.log(test.insertNode(22));
+// console.log(test.insertNode(100));
+// console.log(test.insertNode(130));
+console.log(test.deleteNode(6));
+prettyPrint(test.Tree(testArr));

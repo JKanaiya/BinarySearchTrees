@@ -2,7 +2,7 @@ const levelOrder = function (toLevel) {
   let queue = [toLevel];
   let values = [];
   if (toLevel == null) {
-    return null;
+    throw new Error("Invalid input, please validate your input");
   }
   function levelIterate(node) {
     if (node.left) queue.push(node.left);

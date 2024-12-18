@@ -1,5 +1,8 @@
 const postOrder = function (temp) {
   let values = [];
+  if (temp == null) {
+    throw new Error("Invalid input, please validate your input");
+  }
   function postIterate(node) {
     if (node.left) postIterate(node.left);
 

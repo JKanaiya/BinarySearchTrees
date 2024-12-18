@@ -1,5 +1,8 @@
 const inOrder = function (temp) {
   let values = [];
+  if (temp == null) {
+    throw new Error("Invalid input, please validate your input");
+  }
   function inIterate(node) {
     if (node.left) inIterate(node.left);
 
