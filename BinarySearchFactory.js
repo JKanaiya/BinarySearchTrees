@@ -153,29 +153,72 @@ const BinarySearchFactory = function () {
   };
 
   const rootReplace = function () {
+    let done = false;
     const multiChildRootReplacement = function (node) {
       // why why why, should i need to account for nonsensical situations
       if (node.left.left) multiChildRootReplacement(node.left);
-      node.left.left = root.left;
-      if (node.left.right) {
-        node.left = node.left.right;
+      if (done) {
+        return;
       }
-      node.left.right = root.right;
-      node.left.right.left.left = null;
-      root = node.left;
-      node.left = null;
+      let temp = node.left;
+      if (temp.right) {
+        node.left = temp.right;
+      } else node.left = null;
+
+      temp.left = root.left;
+      temp.right = root.right;
+
+      root = temp;
+      done = true;
+      return;
     };
     const singleChildRootReplacement = function (node) {
       root = node;
     };
-    if (!root.right.left || !root.right.right) root = root.right;
-    else if (!root.left) {
+    if (!root.right.left || !root.right.right) {
+      root.right.left = root.left;
+      root = root.right;
+    } else if (!root.left) {
       singleChildRootReplacement(root.right);
     } else if (!root.right) {
       singleChildRootReplacement(root.left);
     } else {
       multiChildRootReplacement(root.right);
     }
+  };
+
+  const max = function (a, b) {
+    if (a > b) return a;
+    else return b;
+  };
+
+  const depth = function (value) {
+    const findDepth = function (node) {
+      if (!node) return false;
+      if (value === node.data) return 0;
+      if (value < node.data) return findDepth(node.left) + 1;
+      else return findDepth(node.right) + 1;
+    };
+    return findDepth(root);
+  };
+
+  const height = function (value) {
+    let r = null;
+    const findHeight = function (node) {
+      if (!node) return;
+      if (value === node.data) {
+        const getToLeaf = function (node) {
+          if (!node) return -1;
+          return max(getToLeaf(node.left), getToLeaf(node.right)) + 1;
+        };
+        r = getToLeaf(node);
+      } else {
+        if (value < node.data) findHeight(node.left) + 1;
+        else findHeight(node.right) + 1;
+      }
+    };
+    findHeight(root);
+    return r;
   };
 
   const find = function (value) {
@@ -200,6 +243,8 @@ const BinarySearchFactory = function () {
     find,
     insertNode,
     deleteNode,
+    depth,
+    height,
   };
 };
 
