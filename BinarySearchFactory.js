@@ -1,3 +1,5 @@
+import { inOrder } from "./inOrder.js";
+
 const BinarySearchFactory = function () {
   const nodeConstruct = function (data, left, right) {
     if (!left) left = null;
@@ -50,23 +52,45 @@ const BinarySearchFactory = function () {
   };
 
   const insertNode = function (value) {
-    let done = false;
+    let done = "Failed to Insert";
     function insertValue(node) {
       if (node.left && value < node.data) insertValue(node.left);
       else if (!node.left && value < node.data) {
         node.left = nodeConstruct(value);
-        done = true;
+        done = "Successfully Inserted";
         return;
       } else if (node.right) insertValue(node.right);
       else if (!node.right) {
         node.right = nodeConstruct(value);
-        done = true;
+        done = "Successfully Inserted";
         return;
       }
       return;
     }
     insertValue(root);
     return done;
+  };
+
+  const isGreaterDifference = function (a, b) {
+    if (a == b) return true;
+    if (a + 1 != b || b + 1 != a) return false;
+    else return true;
+  };
+
+  const isBalanced = function () {
+    const getToLeaf = function (node) {
+      if (!node) return -1;
+      return max(getToLeaf(node.left), getToLeaf(node.right)) + 1;
+    };
+    if (isGreaterDifference(getToLeaf(root.left), getToLeaf(root.right)))
+      return true;
+    else return false;
+  };
+
+  const reBalance = function () {
+    let temp = inOrder(root);
+    root = null;
+    Tree(temp);
   };
 
   const deleteNode = function (value) {
@@ -132,7 +156,6 @@ const BinarySearchFactory = function () {
 
     findValue(root);
 
-    console.log(parent);
     if (parent[direction]) {
       if (parent[direction].left && parent[direction].right) {
         multiChildRemove();
@@ -237,6 +260,10 @@ const BinarySearchFactory = function () {
     return found;
   };
 
+  const getRoot = function () {
+    return root;
+  };
+
   return {
     prepareArray,
     Tree,
@@ -245,6 +272,9 @@ const BinarySearchFactory = function () {
     deleteNode,
     depth,
     height,
+    isBalanced,
+    reBalance,
+    getRoot,
   };
 };
 

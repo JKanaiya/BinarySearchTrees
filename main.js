@@ -4,43 +4,45 @@ import { preOrder } from "./preOrder.js";
 import { inOrder } from "./inOrder.js";
 import { postOrder } from "./postOrder.js";
 
-let testArr = [122, 1, 2, 3, 4, 5, 5, 6, 11, 11, 7, 8];
+let testArr = [];
 
-let test = BinarySearchFactory();
-
-const prettyPrint = (node, prefix = "", isLeft = true) => {
-  if (node === null) {
-    return;
-  }
-  if (node.right !== null) {
-    prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
-  }
-  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
-  if (node.left !== null) {
-    prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+const genTestArr = function () {
+  for (let i = 0; i < 20; i++) {
+    testArr[i] = Math.floor(Math.random() * 100);
   }
 };
 
-prettyPrint(test.Tree(testArr));
-
-// console.log("Level-Order");
-// console.log(levelOrder(test.Tree(testArr)));
-// console.log("Pre-Order");
-// console.log(preOrder(test.Tree(testArr)));
-// console.log("In-Order");
-// console.log(inOrder(test.Tree(testArr)));
-// console.log("Post-Order");
-// console.log(postOrder(test.Tree(testArr)));
-let value = 8;
-// console.log("Find Value " + value);
-// console.log(test.find(value));
-// console.log(test.insertNode(42));
-console.log(test.insertNode(9));
-// console.log(test.insertNode(10));
-// console.log(test.insertNode(22));
-// console.log(test.insertNode(100));
-// console.log(test.insertNode(130));
-// test.deleteNode(6);
-// test.deleteNode(2);
-console.log(test.depth(5));
-console.log(test.height(6));
+const driverFunction = function () {
+  let test = BinarySearchFactory();
+  test.Tree(testArr);
+  console.log("Is the Tree Balanced? " + test.isBalanced());
+  console.log("Level-Order");
+  console.log(levelOrder(test.Tree(testArr)));
+  console.log("Pre-Order");
+  console.log(preOrder(test.Tree(testArr)));
+  console.log("In-Order");
+  console.log(inOrder(test.Tree(testArr)));
+  console.log("Post-Order");
+  console.log(postOrder(test.Tree(testArr)));
+  console.log("Adding values to the tree...");
+  test.insertNode(120);
+  test.insertNode(130);
+  test.insertNode(180);
+  test.insertNode(170);
+  test.insertNode(160);
+  test.insertNode(150);
+  console.log("Is the Tree Balanced? " + test.isBalanced());
+  console.log("Rebalance");
+  test.reBalance();
+  console.log("Is the Tree Balanced? " + test.isBalanced());
+  console.log("Level-Order");
+  console.log(levelOrder(test.Tree(testArr)));
+  console.log("Pre-Order");
+  console.log(preOrder(test.Tree(testArr)));
+  console.log("In-Order");
+  console.log(inOrder(test.Tree(testArr)));
+  console.log("Post-Order");
+  console.log(postOrder(test.Tree(testArr)));
+};
+genTestArr();
+driverFunction();
