@@ -73,8 +73,7 @@ const BinarySearchFactory = function () {
 
   const isGreaterDifference = function (a, b) {
     if (a == b) return true;
-    if (a + 1 != b || b + 1 != a) return false;
-    else return true;
+    return !(a + 1 != b || b + 1 != a);
   };
 
   const isBalanced = function () {
@@ -82,9 +81,7 @@ const BinarySearchFactory = function () {
       if (!node) return -1;
       return max(getToLeaf(node.left), getToLeaf(node.right)) + 1;
     };
-    if (isGreaterDifference(getToLeaf(root.left), getToLeaf(root.right)))
-      return true;
-    else return false;
+    return isGreaterDifference(getToLeaf(root.left), getToLeaf(root.right));
   };
 
   const reBalance = function () {
